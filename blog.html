@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color:black;
+        }
+        #image-contaner {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+        #image {
+           padding-top: 20px;
+        }
+        .context-menu-holder{
+            overflow-x: auto;
+            display: flex;
+            background-color: #333;
+            border-radius: 5px;
+
+            
+        }
+        .context-menu-holder a,
+        .context-menu-holder a:visited,
+        .context-menu-holder a:hover,
+        .context-menu-holder a:active,
+        .context-menu-holder a:focus {
+             outline: none;
+            text-decoration: none;
+        }
+        
+        .context-menu-item {
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            width:5em;
+            height:2em;
+            scroll-snap-align: start;
+            border-radius: 5px;
+            text-align: center;
+            margin: 5px;
+            align-items: center;
+            
+        }
+        .context-menu-item:hover {
+            background-color: #555;
+        }
+        #main-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+            scroll-snap-type: x proximity;
+           
+            height: 400px;
+            width:70%;
+            justify-content: flex-start;
+            align-items: center;
+            
+            margin: 10px auto;
+            }
+        .carousel-item {
+            flex: 0 0 800px;
+            height: 400px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        .carousel-image {
+            height: 80%;
+            width: auto;
+            margin-right: 10px;
+        }
+         #main-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        #main-carousel {
+      /* Cross-browser standard for modern Firefox and Chromium */
+        scrollbar-width: none; 
+        }
+
+    </style>
+    <script>
+        // Script content can be added here
+        function scrollContainerLeft() {
+            document.querySelector('#main-carousel').scrollBy({ left: -800, behavior: 'smooth' });
+            console.log("Scrolling left");
+      }
+
+      function scrollContainerRight() {
+            const carousel = document.querySelector('#main-carousel');
+            const atEnd = carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 5; // small buffer for rounding
+            console.log("Scrolling right");
+
+            if (atEnd) {
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                console.log("Reached the end of the carousel");
+            }
+            else {
+                carousel.scrollBy({ left: 800, behavior: 'smooth' });
+    }
+
+      }
+      window.onload = async function autoScroll() {             // Start auto-scrolling when the page loads
+        while (true) {
+          scrollContainerRight();
+          console.log("Auto-scrolling");
+          await new Promise(resolve => setTimeout(resolve, 3000)); // Wait for 3 seconds
+        }
+        
+       
+      }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="context-menu-holder">
+            <a href="blog.html"><img src="modrinth_invert.png" alt="Logo" style="height: 40px; margin: 5px;"></a>
+            <a href="Untitled-1.html"><div class="context-menu-item">Item 1</div></a>
+            <a href="Untitled-1.html"><div class="context-menu-item">Item 2</div></a>
+            <a href="Untitled-1.html"><div class="context-menu-item">Item 3</div></a>
+            <a href="Untitled-1.html"><div class="context-menu-item">Item 4</div></a>
+            <a href="Untitled-1.html"><div class="context-menu-item">Item 5</div></a>
+            <a href="Untitled-1.html"><div class="context-menu-item">Item 6</div></a>
+            <a href="Untitled-1.html"><div class="context-menu-item">Item 7</div></a>
+        </div>
+    </header>
+    <main>
+        <div id="image-contaner">
+            <img id="image" src="modrinth_invert.png">
+        </div>
+        <div id="main-carousel">
+            <div class="carousel-item"><img class="carousel-image" src="Scanned_20260923-2219.jpg"><p>this is a photo of my xbox series s that i took apart</p></div>
+            <div class="carousel-item"><p>Yeah that really is it. I don't do much that's impressive.</p></div>
+            <div class="carousel-item"><img class="carousel-image" src="IMG_20260912_200840018.jpg"><p>also this is my main pc</p></div>
+            <div class="carousel-item"><p>this scrolling thing is really cool, right?</p></div>
+
+            
+                  
+
+        </div>
+        <button onclick="scrollContainerLeft()">Scroll Left</button>
+        <button onclick="scrollContainerRight()">Scroll Right</button>
+        
+    </main>
+    <footer></footer>
+</body>
+</html>
